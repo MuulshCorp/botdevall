@@ -1,0 +1,27 @@
+{
+  "name": "botdevall",
+  "version": "1.0.0",
+  "description": "bot pour devall",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Muulsh",
+  "license": "MIT",
+  "keywords": [
+    "devall",
+    "bot",
+    "discord"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MuulshCorp/botdevall.git"
+  },
+  "bugs": {
+    "url": "https://github.com/MuulshCorp/botdevall/issues"
+  },
+  "homepage": "https://github.com/MuulshCorp/botdevall#readme",
+  "dependencies": {
+    "discord.js": "^11.4.2"
+  }
+}
