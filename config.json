@@ -1,0 +1,7 @@
+{ 
+  "prefix" : "+",
+  "role" : {
+  	"say" : "say",
+  	"staff" : "staff"
+  }
+}
