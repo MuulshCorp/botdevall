@@ -21,7 +21,7 @@ if(message.content.indexOf(config.prefix) !== 0) return;
 if (!message.content.startsWith(config.prefix) || message.author.bot) return;
 
 if(command == "say") {
-  	if(!message.member.roles.some(r=>[config.role.say].includes(r.name)))
+  	if(!message.member.roles.some(r=>[config.role.staff].includes(r.name)))
   	return message.reply("Vous n'avez pas le rôle `"+config.role.staff+"` pour utiliser cette commande!");
     
     if (args[0] == "" || args[0] == null) {
