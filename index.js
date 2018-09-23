@@ -16,6 +16,7 @@ let config = JSON.parse(rawdata);
 const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
 const command = args.shift().toLowerCase();
 function logs(name, commande, messageID, salon) {
+  var slogs = client.channels.get('486909004908331018');
   slogs.send('logs ---')
 slogs.send({embed: {
     color: 3447003,
