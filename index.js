@@ -31,6 +31,7 @@ function logs(name, commande, messageID, salon) {
   var slogs = client.channels.get('486909004908331018');
   slogs.send('logs ---')
 slogs.send(date()+'\n\nnom : '+name+`Commande: ${commande}\nSalon: ${salon}\nMessage ID: ${messageID}`);
+};
 
 function name() {
   return message.author.username+"#"+message.author.discriminator;
