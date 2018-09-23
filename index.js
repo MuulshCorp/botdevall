@@ -16,14 +16,15 @@ let config = JSON.parse(rawdata);
 const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
 const command = args.shift().toLowerCase();
 function logs(name, commande, messageID, salon) {
+  slogs.send('logs ---')
 slogs.send({embed: {
     color: 3447003,
     fields: [
       {
         name: name,
-        value: "Commande: "+commande+
-        "\nSalon: "+salon+
-        "\nMessage ID: "+messageID
+        value: `Commande: ${commande}` +
+        `\nSalon: ${salon}` +
+        `\nMessage ID: ${messageID}`
       }
     ],
     timestamp: new Date(),
