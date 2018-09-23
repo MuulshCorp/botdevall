@@ -19,6 +19,7 @@ client.on("ready", () => {
   console.log('ready');
   client.user.setActivity(config.prefix+`help`);
   var slogs = client.channels.get('486909004908331018');
+  slogs.send('ready');
 });
 
 client.on("message", async message => {
