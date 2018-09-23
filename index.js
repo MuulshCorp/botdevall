@@ -28,10 +28,6 @@ let config = JSON.parse(rawdata);
 const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
 const command = args.shift().toLowerCase();
 
-function logs(name, commande, messageID, salon) {
-message.channels.send(date()+'\n\nnom : '+name+`Commande: ${commande}\nSalon: ${salon}\nMessage ID: ${messageID}`);
-};
-
 function name() {
   return message.author.username+"#"+message.author.discriminator;
 }
@@ -51,7 +47,6 @@ if(command == "say") {
     const sayMessage = args.join(" ");
     message.delete().catch(O_o=>{}); 
     return message.channel.send(sayMessage);
-    logs(name(), config.prefix+"say"+sayMessage, message.channel.last_message_id, message.channel.id)
 }
 
 if(command == "prefix") {
@@ -63,8 +58,6 @@ if(command == "prefix") {
     }
 
   	prefix = args[0];
-
-    logs(name(), config.prefix+"prefix"+prefix, message.channel.last_message_id, message.channel.id)
 
     var raw = { prefix: prefix, role: { say: config.role.say, staff: config.role.staff } };
     let data = JSON.stringify(raw, null, 2);
@@ -90,8 +83,6 @@ if(command == "edit") {
     if (args[1] == "" || args[1] == null) {
       return message.channel.send('Vous devez choisir un nouveau nom ! (le nouveau nom ne doit pas contenir d\'espace)')
     }
-
-    logs(name(), config.prefix+"edit"+args[0]+args[1], message.channel.last_message_id, message.channel.id)
 
     var raw = { prefix: config.prefix, role: { staff: staff } };
     let data = JSON.stringify(raw, null, 2);
