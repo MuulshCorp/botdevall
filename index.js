@@ -2,6 +2,17 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const fs = require("fs");
 
+function date() {
+  var now     = new Date();
+  var annee   = now.getFullYear();
+  var mois    = now.getMonth() + 1;
+  var jour    = now.getDate();
+  var heure   = now.getHours() + 2;
+  var minute  = now.getMinutes();
+  var seconde = now.getSeconds();
+  return "Nous somme le "+jour+"/"+mois+"/"+annee+" et il est "+heure+"h "+minute+"mins "+seconde+"sec";
+}
+
 client.on("ready", () => {
   let rawdata = fs.readFileSync('config.json');  
   let config = JSON.parse(rawdata);
@@ -15,27 +26,11 @@ let rawdata = fs.readFileSync('config.json');
 let config = JSON.parse(rawdata);
 const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
 const command = args.shift().toLowerCase();
+
 function logs(name, commande, messageID, salon) {
   var slogs = client.channels.get('486909004908331018');
   slogs.send('logs ---')
-slogs.send({embed: {
-    color: 3447003,
-    fields: [
-      {
-        name: name,
-        value: `Commande: ${commande}` +
-        `\nSalon: ${salon}` +
-        `\nMessage ID: ${messageID}`
-      }
-    ],
-    timestamp: new Date(),
-    footer: {
-      icon_url: client.user.avatarURL,
-      text: "Logs in "+config.logs
-    }
-  }
-});
-}
+slogs.send(date()'\n\nnom : '+name+`Commande: ${commande}\nSalon: ${salon}\nMessage ID: ${messageID}`):
 
 function name() {
   return message.author.username+"#"+message.author.discriminator;
