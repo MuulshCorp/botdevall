@@ -2,7 +2,6 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const fs = require("fs");
 
-
 client.on("ready", () => {
   let rawdata = fs.readFileSync('config.json');  
   let config = JSON.parse(rawdata);
@@ -15,6 +14,30 @@ let rawdata = fs.readFileSync('config.json');
 let config = JSON.parse(rawdata);
 const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
 const command = args.shift().toLowerCase();
+
+function logs(name, commande, messageID, salon) {
+config.logs.send({embed: {
+    color: 3447003,
+    fields: [
+      {
+        name: name,
+        value: "Commande: "+commande+
+        "\nSalon: "+salon+
+        "\nMessage ID: "+messageID
+      }
+    ],
+    timestamp: new Date(),
+    footer: {
+      icon_url: client.user.avatarURL,
+      text: "Logs in "+config.logs
+    }
+  }
+});
+}
+
+function name() {
+  return message.author.username+"#"+message.author.discriminator;
+}
 
 if(message.content.indexOf(config.prefix) !== 0) return;
 
@@ -31,6 +54,7 @@ if(command == "say") {
     const sayMessage = args.join(" ");
     message.delete().catch(O_o=>{}); 
     return message.channel.send(sayMessage);
+    logs(name(), config.prefix+"say"+sayMessage, message.channel.last_message_id, message.channel.id)
 }
 
 if(command == "prefix") {
@@ -43,12 +67,15 @@ if(command == "prefix") {
 
   	prefix = args[0];
 
+    logs(name(), config.prefix+"prefix"+prefix, message.channel.last_message_id, message.channel.id)
+
     var raw = { prefix: prefix, role: { say: config.role.say, staff: config.role.staff } };
     let data = JSON.stringify(raw, null, 2);
     fs.writeFileSync('config.json', data);
 
     client.user.setActivity(prefix+`help`);
     return message.channel.send('Le nouveau préfixe est `'+prefix+'` !').catch(O_o=>{});
+
 }
 
 if(command == "edit") {
@@ -66,7 +93,9 @@ if(command == "edit") {
     if (args[1] == "" || args[1] == null) {
       return message.channel.send('Vous devez choisir un nouveau nom ! (le nouveau nom ne doit pas contenir d\'espace)')
     }
-    
+
+    logs(name(), config.prefix+"edit"+args[0]+args[1], message.channel.last_message_id, message.channel.id)
+
     var raw = { prefix: config.prefix, role: { staff: staff } };
     let data = JSON.stringify(raw, null, 2);
     fs.writeFileSync('config.json', data);
