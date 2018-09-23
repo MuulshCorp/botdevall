@@ -1,7 +1,6 @@
-{ 
-  "prefix" : "+",
-  "role" : {
-  	"say" : "say",
-  	"staff" : "staff"
+{
+  "prefix": "/",
+  "role": {
+    "staff": "say"
   }
 }
