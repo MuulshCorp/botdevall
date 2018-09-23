@@ -14,7 +14,7 @@ let rawdata = fs.readFileSync('config.json');
 let config = JSON.parse(rawdata);
 const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
 const command = args.shift().toLowerCase();
-var slogs = config.logs;
+var slogs = client.channels.get(config.logs);
 function logs(name, commande, messageID, salon) {
 slogs.send({embed: {
     color: 3447003,
