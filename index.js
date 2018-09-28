@@ -96,5 +96,8 @@ if(command == "help") {
 	return message.channel.send('›`'+config.prefix+'say <message>` \nPour utiliser cette commande il vous faut le rôle `'+config.role.staff+'`\n\n›`'+config.prefix+'prefix <nouveau préfixe>` \nPour utiliser cette commande il vous faut le rôle `'+config.role.staff+'`\n\n›`'+config.prefix+'edit <role> <nouveau nom du rôle>` \nPour modifier les rôles qu\'il faut avoir pour utiliser les commandes; pour utiliser cette commande il vous faut le rôle `'+config.role.staff+'`');
 }
 
+if (message.content == "m.test") {
+  message.channel.send(message.content);
+}
 });
 client.login(process.env.TOKEN);
