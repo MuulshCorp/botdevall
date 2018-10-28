@@ -48,7 +48,9 @@ if(command == "say") {
     message.delete().catch(O_o=>{}); 
     return message.channel.send(sayMessage);
 }
-
+  if(message.content.startsWith === ":inversed_ok_hand:") {
+    message.channel.send(':point_left:');
+}
 if(command == "prefix") {
   	if(!message.member.roles.some(r=>[config.role.staff].includes(r.name)) )
   	return message.reply("Vous n'avez pas le rôle `"+config.role.staff+"` pour utiliser cette commande!");
