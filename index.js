@@ -34,6 +34,10 @@ client.on('guildMemberAdd', member => {
 
 
 client.on("message", async message => {
+function slogs(message=error) {
+	slogs = client.channels.get('518866036850950145');
+	slogs.send("logs: "+message);
+}
 let config = JSON.parse(fs.readFileSync('config.json'));
 const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
 const command = args.shift().toLowerCase();
