@@ -77,7 +77,7 @@ if(command == "prefix") {
 
 }
 
-if(command == "edit") {
+if(command == "edit-role") {
     if(!message.member.roles.some(r=>[config.role.staff].includes(r.name))) 
     return message.reply("Vous n'avez pas le rôle  `"+config.role.staff+"` pour utiliser cette commande!");
   
@@ -102,7 +102,8 @@ if(command == "edit") {
 }
 
 if(command == "help") { 
-	return message.channel.send('›`'+config.prefix+'say <message>` \nLe rôle `'+config.role.staff+'` est requis');
+	message.channel.send('›`'+config.prefix+'say <message>` \nLe rôle `'+config.role.staff+'` est requis\n\n');
+	message.channel.send('›`'+config.prefix+'edit-role <role>` \nLe rôle `'+config.role.staff+'` est requis\n\n');
 }
 
 });
