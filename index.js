@@ -76,7 +76,9 @@ if(command == "say") {
 }
 	
 	
-	
+if(command == "test") {
+	message.reply(avatarURL);
+}
 	
 if(command == "prefix") {
   	if(!message.member.roles.some(r=>[config.role.staff].includes(r.name)) )
