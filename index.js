@@ -25,6 +25,7 @@ client.on("ready", () => {
 client.on('guildMemberAdd', member => {
   let role = member.guild.roles.find("name", "Membre");
   member.addRole(role);
+  console.log('member join: {member} ');
 });
 
 
