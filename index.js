@@ -12,22 +12,24 @@ function date() {
   var seconde = now.getSeconds();
   return "Nous somme le "+jour+"/"+mois+"/"+annee+" et il est "+heure+"h "+minute+"mins "+seconde+"sec";
 }
-
-slogs = client.channels.get('518866036850950145');
+function slogs(message=error) {
+	slogs = client.channels.get('518866036850950145');
+	slogs.send(message);
+}
 
 client.on("ready", () => {
   let rawdata = fs.readFileSync('config.json');  
   let config = JSON.parse(rawdata);
   console.log('ready');
   client.user.setActivity(config.prefix+`help`);
-  slogs.send('ready');
+  slogs('ready');
 });
 
 client.on('guildMemberAdd', member => {
   let role = member.guild.roles.find("name", "Membre");
   member.addRole(role);
   console.log('member join: {member} ');
-  slogs.send('member join: {member} ');
+  slogs('member join: {member} ');
 });
 
 
@@ -46,7 +48,7 @@ if (!message.content.startsWith(config.prefix) || message.author.bot) return;
 
 if(command == "say") {
 	if(!message.member.roles.some(r=>[config.role.staff].includes(r.name)))
-  		return message.reply("Il vous faut le rôle `"+config.role.staff+"` pour utiliser cette commande!");
+  		return message.reply("Il vous faut le rôle `"+config.role.staff+"` pour utiliser cette commande!");	
     
 	if (args[0] == "" || args[0] == null) {
       return message.channel.send('Vous devez écrire un message !')
@@ -54,6 +56,7 @@ if(command == "say") {
 
     const sayMessage = args.join(" ");
     message.delete(1000);
+	slogs(sayMessage);
     return message.channel.send(sayMessage);
 }
 	
@@ -75,7 +78,7 @@ if(command == "prefix") {
     fs.writeFileSync('config.json', data);
 
     client.user.setActivity(prefix+`help`);
-	slogs.send('Le nouveau préfixe est `'+prefix+'` !').catch(O_o=>{});
+	slogs('Le nouveau préfixe est `'+prefix+'` !').catch(O_o=>{});
     return message.channel.send('Le nouveau préfixe est `'+prefix+'` !').catch(O_o=>{});
 
 }
@@ -99,7 +102,7 @@ if(command == "edit-role") {
     var raw = { prefix: config.prefix, role: { staff: staff } };
     let data = JSON.stringify(raw, null, 2);
     fs.writeFileSync('config.json', data);
-	slogs.send('Le nouveau rôle pour les commandes d\'administration est  `'+staff+'` !').catch(O_o=>{})
+	slogs('Le nouveau rôle pour les commandes d\'administration est  `'+staff+'` !').catch(O_o=>{})
     message.channel.send('Le nouveau rôle pour les commandes d\'administration est  `'+staff+'` !').catch(O_o=>{});
     
 }
