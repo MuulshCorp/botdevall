@@ -34,10 +34,7 @@ client.on('guildMemberAdd', member => {
 
 
 client.on("message", async message => {
-function slogs(message=error) {
-	slogs = client.channels.get('518866036850950145');
-	slogs.send("logs: "+message);
-}
+
 let config = JSON.parse(fs.readFileSync('config.json'));
 const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
 const command = args.shift().toLowerCase();
@@ -45,7 +42,10 @@ const command = args.shift().toLowerCase();
 function name() {
   return message.author.username+"#"+message.author.discriminator;
 }
-
+function slogs(message=error, command) {
+	slogs = client.channels.get('518866036850950145');
+	slogs.send("logs: "+name()+" - "+config.prefix+command+": "+message);
+}
 if(message.content.indexOf(config.prefix) !== 0) return;
 
 if (!message.content.startsWith(config.prefix) || message.author.bot) return;
@@ -60,7 +60,7 @@ if(command == "say") {
 
     const sayMessage = args.join(" ");
     message.delete(1000);
-	slogs(sayMessage);
+	slogs(sayMessage,"say");
     return message.channel.send(sayMessage);
 }
 	
@@ -82,7 +82,7 @@ if(command == "prefix") {
     fs.writeFileSync('config.json', data);
 
     client.user.setActivity(prefix+`help`);
-	slogs('Le nouveau préfixe est `'+prefix+'` !').catch(O_o=>{});
+	slogs('Le nouveau préfixe est `'+prefix+'` !').catch(O_o=>{},"prefix");
     return message.channel.send('Le nouveau préfixe est `'+prefix+'` !').catch(O_o=>{});
 
 }
@@ -106,7 +106,7 @@ if(command == "edit-role") {
     var raw = { prefix: config.prefix, role: { staff: staff } };
     let data = JSON.stringify(raw, null, 2);
     fs.writeFileSync('config.json', data);
-	slogs('Le nouveau rôle pour les commandes d\'administration est  `'+staff+'` !').catch(O_o=>{})
+	slogs('Le nouveau rôle pour les commandes d\'administration est  `'+staff+'` !').catch(O_o=>{}, "edit-role")
     message.channel.send('Le nouveau rôle pour les commandes d\'administration est  `'+staff+'` !').catch(O_o=>{});
     
 }
