@@ -77,7 +77,7 @@ if(command == "say") {
 	
 	
 if(command == "test") {
-	message.reply(avatarURL);
+	message.reply(avatarURL());
 }
 	
 if(command == "prefix") {
