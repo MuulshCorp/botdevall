@@ -44,20 +44,21 @@ if(message.content.indexOf(config.prefix) !== 0) return;
 if (!message.content.startsWith(config.prefix) || message.author.bot) return;
 
 if(command == "say") {
-  	if(!message.member.roles.some(r=>[config.role.staff].includes(r.name)))
-  	return message.reply("Vous n'avez pas le rôle `"+config.role.staff+"` pour utiliser cette commande!");
+	if(!message.member.roles.some(r=>[config.role.staff].includes(r.name)))
+  		return message.reply("Il vous faut le rôle `"+config.role.staff+"` pour utiliser cette commande!");
     
-    if (args[0] == "" || args[0] == null) {
+	if (args[0] == "" || args[0] == null) {
       return message.channel.send('Vous devez écrire un message !')
     }
 
     const sayMessage = args.join(" ");
-    message.delete().catch(O_o=>{}); 
+    message.delete(1000);
     return message.channel.send(sayMessage);
 }
-  if(message.content.startsWith === ":inversed_ok_hand:") {
-    message.channel.send(':point_left:');
-}
+	
+	
+	
+	
 if(command == "prefix") {
   	if(!message.member.roles.some(r=>[config.role.staff].includes(r.name)) )
   	return message.reply("Vous n'avez pas le rôle `"+config.role.staff+"` pour utiliser cette commande!");
@@ -102,7 +103,7 @@ if(command == "edit") {
 }
 
 if(command == "help") { 
-	return message.channel.send('›`'+config.prefix+'say <message>` \nPour utiliser cette commande il vous faut le rôle `'+config.role.staff+'`\n\n›`'+config.prefix+'prefix <nouveau préfixe>` \nPour utiliser cette commande il vous faut le rôle `'+config.role.staff+'`\n\n›`'+config.prefix+'edit <role> <nouveau nom du rôle>` \nPour modifier les rôles qu\'il faut avoir pour utiliser les commandes; pour utiliser cette commande il vous faut le rôle `'+config.role.staff+'`');
+	return message.channel.send('›`'+config.prefix+'say <message>` \nLe rôle `'+config.role.staff+'` est requis`);
 }
 
 });
