@@ -30,8 +30,7 @@ client.on('guildMemberAdd', member => {
 
 
 client.on("message", async message => {
-let rawdata = fs.readFileSync('config.json');  
-let config = JSON.parse(rawdata);
+let config = JSON.parse(fs.readFileSync('config.json'));
 const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
 const command = args.shift().toLowerCase();
 
@@ -103,7 +102,7 @@ if(command == "edit") {
 }
 
 if(command == "help") { 
-	return message.channel.send('›`'+config.prefix+'say <message>` \nLe rôle `'+config.role.staff+'` est requis`);
+	return message.channel.send('›`'+config.prefix+'say <message>` \nLe rôle `'+config.role.staff+'` est requis');
 }
 
 });
