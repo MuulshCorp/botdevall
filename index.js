@@ -42,12 +42,15 @@ const command = args.shift().toLowerCase();
 function name() {
   return message.author.username+"#"+message.author.discriminator;
 }
+function avatarURL() {
+  return message.author.message.author.avatarURL;
+}
 function slogs(message=error, command) {
 	slogs = client.channels.get('518866036850950145');
 	
 	const slogsMessage = new Discord.RichEmbed()
 	.setColor('#0099ff')
-	.setAuthor(name(), message.author.avatarURL)
+	.setAuthor(name(), avatarURL())
 	.setDescription('config.prefix+command+" "+message')
 	.setTimestamp()
 	.setFooter('Horizon Logs');
