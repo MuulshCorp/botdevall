@@ -51,7 +51,7 @@ function slogs(message=error, command) {
 	const slogsMessage = new Discord.RichEmbed()
 	.setColor('#0099ff')
 	.setAuthor(name(), avatarURL())
-	.setDescription('config.prefix+command+" "+message')
+	.setDescription(config.prefix+command+" "+message)
 	.setTimestamp()
 	.setFooter('Horizon Logs');
 	
