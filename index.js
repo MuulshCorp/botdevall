@@ -44,7 +44,15 @@ function name() {
 }
 function slogs(message=error, command) {
 	slogs = client.channels.get('518866036850950145');
-	slogs.send("logs: "+name()+" - "+config.prefix+command+": "+message);
+	
+	const slogsMessage = new Discord.RichEmbed()
+	.setColor('#0099ff')
+	.setAuthor(name(), message.author.avatarURL)
+	.setDescription('config.prefix+command+" "+message')
+	.setTimestamp()
+	.setFooter('Horizon Logs');
+	
+	slogs.send(slogsMessage);
 }
 if(message.content.indexOf(config.prefix) !== 0) return;
 
