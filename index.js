@@ -12,7 +12,9 @@ function date() {
   var seconde = now.getSeconds();
   return "Nous somme le "+jour+"/"+mois+"/"+annee+" et il est "+heure+"h "+minute+"mins "+seconde+"sec";
 }
-var slogs = client.channels.get('518866036850950145');
+
+slogs = client.channels.get('518866036850950145');
+
 client.on("ready", () => {
   let rawdata = fs.readFileSync('config.json');  
   let config = JSON.parse(rawdata);
