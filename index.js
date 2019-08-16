@@ -14,7 +14,7 @@ function date() {
 }
 function slogs(message=error) {
 	slogs = client.channels.get('518866036850950145');
-	slogs.send(message);
+	slogs.send("logs: "+message);
 }
 
 client.on("ready", () => {
