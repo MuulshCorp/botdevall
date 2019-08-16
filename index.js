@@ -12,13 +12,12 @@ function date() {
   var seconde = now.getSeconds();
   return "Nous somme le "+jour+"/"+mois+"/"+annee+" et il est "+heure+"h "+minute+"mins "+seconde+"sec";
 }
-
+var slogs = client.channels.get('518866036850950145');
 client.on("ready", () => {
   let rawdata = fs.readFileSync('config.json');  
   let config = JSON.parse(rawdata);
   console.log('ready');
   client.user.setActivity(config.prefix+`help`);
-  var slogs = client.channels.get('486909004908331018');
   slogs.send('ready');
 });
 
@@ -26,6 +25,7 @@ client.on('guildMemberAdd', member => {
   let role = member.guild.roles.find("name", "Membre");
   member.addRole(role);
   console.log('member join: {member} ');
+  slogs.send('member join: {member} ');
 });
 
 
@@ -73,6 +73,7 @@ if(command == "prefix") {
     fs.writeFileSync('config.json', data);
 
     client.user.setActivity(prefix+`help`);
+	slogs.send('Le nouveau préfixe est `'+prefix+'` !').catch(O_o=>{});
     return message.channel.send('Le nouveau préfixe est `'+prefix+'` !').catch(O_o=>{});
 
 }
@@ -86,7 +87,7 @@ if(command == "edit-role") {
     if (args[0] == "say") {
       staff = args[1];
     } else {
-      return message.channel.send('La commande à suivre :\n›`'+config.prefix+'edit <role> <nouveau nom du rôle>` (<role> = say)')
+      return message.channel.send('La commande à suivre :\n›`'+config.prefix+'edit-role <role> <nouveau nom du rôle>` (<role> = say)')
     }
     
     if (args[1] == "" || args[1] == null) {
@@ -96,14 +97,13 @@ if(command == "edit-role") {
     var raw = { prefix: config.prefix, role: { staff: staff } };
     let data = JSON.stringify(raw, null, 2);
     fs.writeFileSync('config.json', data);
-
+	slogs.send('Le nouveau rôle pour les commandes d\'administration est  `'+staff+'` !').catch(O_o=>{})
     message.channel.send('Le nouveau rôle pour les commandes d\'administration est  `'+staff+'` !').catch(O_o=>{});
     
 }
 
 if(command == "help") { 
-	message.channel.send('›`'+config.prefix+'say <message>` \nLe rôle `'+config.role.staff+'` est requis\n\n');
-	message.channel.send('›`'+config.prefix+'edit-role <role>` \nLe rôle `'+config.role.staff+'` est requis\n\n');
+	message.channel.send('Le rôle `'+config.role.staff+'` est requis pour les commandes suivantes\n›`'+config.prefix+'say <message>` \n\n'+'›`'+config.prefix+'edit-role <role>`\n\n');
 }
 
 });
