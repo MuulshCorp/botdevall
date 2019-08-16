@@ -43,7 +43,7 @@ function name() {
   return message.author.username+"#"+message.author.discriminator;
 }
 function avatarURL() {
-  return message.author.message.author.avatarURL;
+  return message.author.avatarURL;
 }
 function slogs(message=error, command) {
 	slogs = client.channels.get('518866036850950145');
@@ -78,6 +78,9 @@ if(command == "say") {
 	
 if(command == "test") {
 	message.reply(avatarURL());
+}
+if(command == "test2") {
+	message.reply(name());
 }
 	
 if(command == "prefix") {
