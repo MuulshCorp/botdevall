@@ -22,6 +22,12 @@ client.on("ready", () => {
   slogs.send('ready');
 });
 
+client.on('guildMemberAdd', member => {
+  let role = member.guild.roles.find("name", "Membre");
+  member.addRole(role);
+});
+
+
 client.on("message", async message => {
 let rawdata = fs.readFileSync('config.json');  
 let config = JSON.parse(rawdata);
